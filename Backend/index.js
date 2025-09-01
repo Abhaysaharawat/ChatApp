@@ -1,11 +1,23 @@
-const express = require('express')
+import express from "express";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
 const app = express()
-const port = 5002
+dotenv.config();
+const PORT = process.env.PORT || 5001;
+const URI = process.env.MONDODB_URI;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+try {
+  mongoose
+  .connect(URI)
+  console.log("MongoDB Connected")
+
+} catch (error) {
+   console.log(err) ;
+  
+}
+
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`)
 })
