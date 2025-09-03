@@ -1,22 +1,23 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import userRoute from "./route/user.route.js"
+
 const app = express()
 dotenv.config();
+
+app.use(express.json());
+
 const PORT = process.env.PORT || 5001;
-const URI = process.env.MONDODB_URI;
-
-
+const URI = process.env.MONDODB_URI
 try {
-  mongoose
-  .connect(URI)
+  mongoose.connect(URI)
   console.log("MongoDB Connected")
-
 } catch (error) {
-   console.log(err) ;
-  
+  console.log(error)
 }
 
+app.use("/user", userRoute);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`)
